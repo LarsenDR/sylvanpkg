@@ -56,7 +56,7 @@ type Generation struct {
 
 //Create a forest plot
 func createplot() string {
-	return fmt.Sprintf("%s", "fred")
+	return fmt.Sprintf("%s", "hello")
 }
 
 //Write data to a json file
