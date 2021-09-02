@@ -10,6 +10,7 @@ package sylvanpkg
 //
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
@@ -47,18 +48,36 @@ type Section struct {
 
 // Plot definition structure
 type Generation struct {
-	Ptype     string   //Plot type "plantation" or "natural"
-	Ppattern  []string //Planting pattern by species
-	Species   []string //List of species in plot
-	Spdensity []int64  //List of stem density by species
-	Hardcore  int64    //Space around each tree in which no tree can be added
+	Projectname string   //Project name for the simulation
+	Ptype       string   //Plot type "plantation" or "natural"
+	Ppattern    []string //Planting pattern by species
+	Species     []string //List of species in plot
+	Spdensity   []int64  //List of stem density by species
+	Hardcore    int64    //Space around each tree in which no tree can be added
 }
 
 //Create a forest plot
-func createplot() string {
-	return fmt.Sprintf("%s", "hello")
+func createplot(projectname string) string {
+	fmt.Printf("--- Projectname: %s\n", projectname)
+	return fmt.Sprintf("%s", projectname)
 }
 
-//Write data to a json file
+//Write generation data to a json file
+func writegenerate() string {
+	params := Generation{
+		Projectname: "testproject",
+		Ptype:       "plantation",
+		Ppattern:    []string{"wo"},
+		Species:     []string{"wo"},
+		Spdensity:   []int64{100},
+		Hardcore:    10,
+	}
+
+	b, err := json.Marshal(params)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	return fmt.Sprintf("%s", string(b))
+}
 
 //Read data from a json file
